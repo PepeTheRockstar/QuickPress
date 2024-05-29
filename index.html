@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quick Press Now</title>
+    <style>
+        #letter {
+            font-family: 'Impact', sans-serif;
+        }
+        
+        #game {
+            font-size: 80px;
+            text-align: center;
+            margin-top: 20%;
+            
+        }
+        #score, #timer {
+            font-size: 35px;
+        }
+
+        #card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ff0077; /* Change this to your preferred color */
+            border-radius: 25px;
+            z-index: -1;
+        }
+
+        #score{
+            font-family: 'Impact', sans-serif;
+        }
+
+        #timer{
+            font-family: 'Impact', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="card"></div>
+    <div id="game">
+        <div id="letter"></div>
+        <div id="score">Score: 0</div>
+        <div id="timer">Time: 30</div>
+    </div>
+
+    
+    <script>
+       var score = 0;
+        var time = 30;
+        var currentLetter = "";
+        var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()";
+        var timer;
+
+        function randomLetter() {
+            return letters.charAt(Math.floor(Math.random() * letters.length));
+        }
+
+        function updateGame() {
+            currentLetter = randomLetter();
+            document.getElementById("letter").innerText = currentLetter;
+            document.getElementById("score").innerText = "Score: " + score;
+        }
+
+        function startTimer() {
+            timer = setInterval(function() {
+                time--;
+                document.getElementById("timer").innerText = "Time: " + time;
+                if (time <= 0) {
+                    clearInterval(timer);
+                    document.getElementById("letter").innerText = "Game Over!";
+                }
+            }, 1000);
+        }
+
+        window.addEventListener("keydown", function(event) {
+            if (timer === undefined) {
+                startTimer();
+            }
+            if (event.key.toUpperCase() === currentLetter && time > 0) {
+                score++;
+                updateGame();
+            }
+        });
+
+        updateGame();
+    </script>
+</body>
+</html>
