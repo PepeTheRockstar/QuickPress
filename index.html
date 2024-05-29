@@ -78,6 +78,8 @@
         window.addEventListener("keydown", function(event) {
             if (timer === undefined) {
                 startTimer();
+                // Focus the hidden input field
+                document.getElementById("hiddenInput").focus();
             }
             if (event.key.toUpperCase() === currentLetter && time > 0) {
                 score++;
