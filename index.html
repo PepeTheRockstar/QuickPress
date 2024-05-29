@@ -39,13 +39,16 @@
         #keyboard {
             text-align: center;
             margin-top: 20px;
+            width: 50%; /* Adjust this to change the width of the keyboard */
+            margin-left: auto;
+            margin-right: auto;
         }
         .key {
             display: inline-block;
             width: 30px;
             height: 30px;
             line-height: 30px;
-            margin: 2px;
+            margin: 1px; /* Adjust this to change the spacing between keys */
             background-color: #ddd;
             text-align: center;
             cursor: pointer;
@@ -112,6 +115,9 @@
             key.className = "key";
             key.innerText = letters[i];
             key.addEventListener("click", function(event) {
+                if (timer === undefined) {
+                    startTimer();
+                }
                 if (event.target.innerText === currentLetter && time > 0) {
                     score++;
                     updateGame();
